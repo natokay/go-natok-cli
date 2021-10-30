@@ -1,0 +1,14 @@
+# github.com/kataras/golog v0.1.5
+## explicit
+github.com/kataras/golog
+# github.com/kataras/pio v0.0.10
+github.com/kataras/pio
+github.com/kataras/pio/terminal
+# github.com/urfave/cli v1.22.4
+## explicit
+# golang.org/x/sys v0.0.0-20200923182605-d9f96fdee20d
+## explicit
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix
+# gopkg.in/yaml.v2 v2.2.2
+## explicit
