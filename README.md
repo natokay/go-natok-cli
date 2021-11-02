@@ -21,7 +21,7 @@ go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.io,direct
 ```
 
-自主构建natok-cli可执行程序
+构建natok-cli可执行程序
 
 ```shell
 # 克隆项目
