@@ -1,6 +1,13 @@
 # go-natok-cli
 
 
+**Go 1.13 及以上（推荐）**
+```shell
+# 配置 GOPROXY 环境变量
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.io,direct
+```
+
 自主构建natok-cli可执行程序
 
 ```shell
