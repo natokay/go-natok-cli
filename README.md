@@ -1,11 +1,11 @@
 # go-natok-cli
 
 
-配置客户端服务器地址与端口：application.json
-```json
+natok-cli的相关配置：application.json
+```shell
 {
   "natok.server": {
-    "host": "localhost",            // 服务器地址：域名 或者 ip
+    "host": "127.0.0.1",            // 服务器地址：域名 或者 ip
     "port": 1001,                   // 服务器端口：可自定义
     "access-key": "",               // 客户端访问密钥，从natok-server的web页面中C端列表里获取
     "cert-key-path": "s-cert.key",  // TSL加密密钥，可自己指定。注：需与server端保持一致
