@@ -3,7 +3,7 @@
 
 自主构建natok-cli可执行程序
 
-```
+```shell
 # 克隆项目
 git clone https://github.com/play-sy/go-natok-cli.git
 
