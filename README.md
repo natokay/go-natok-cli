@@ -2,7 +2,7 @@
 
 
 natok-cli的相关配置：application.json
-```shell
+```json5
 {
   "natok.server": {
     "host": "127.0.0.1",            // 服务器地址：域名 或者 ip
