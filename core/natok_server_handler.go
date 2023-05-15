@@ -84,7 +84,7 @@ func (n *NatokServerHandler) Receive(connHandler *ConnectHandler, msgData interf
 			addr := string(msg.Data)
 			conn, err := net.Dial("tcp", addr)
 			if err != nil {
-				golog.Error("Failed to connect intranet server", err)
+				golog.Errorf("Failed to connect intranet server! %+v", err)
 				intraServerHandler.Failure()
 			} else {
 				connectHandler := &ConnectHandler{Conn: conn}
