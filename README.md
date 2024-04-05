@@ -1,6 +1,6 @@
 # NATOK
 
-- natok是一个将局域网内个人服务代理到公网可访问的内网穿透工具，基于tcp协议，支持任何tcp上层协议（列如：http、https、ssh、telnet、data base、remote desktop....）。
+- natok是一个将局域网内个人服务代理到公网可访问的内网穿透工具，基于tcp协议、支持udp协议，支持任何tcp上层协议（列如：http、https、ssh、telnet、data base、remote desktop....）。
 - 目前市面上提供类似服务的有：花生壳、natapp、ngrok等等。当然，这些工具都很优秀！但是免费提供的服务都很有限，想要有比较好的体验都需要支付一定的套餐费用，由于数据包会流经第三方，因此总归有些不太友好。
 - natok-server与natok-cli都基于GO语言开发，几乎不存在并发问题。运行时的内存开销也很低，一般在几十M左右。所以很推荐自主搭建服务！
 
@@ -12,10 +12,9 @@
 | natok-cli |linux/windows| [GitHub](https://github.com/natokay/go-natok-cli/releases) |
 | natok-server| linux/windows|[GitHub](https://github.com/natokay/go-natok-server/releases) |
 
-# go-natok-cli:1.2.0
 
 
-natok-cli的相关配置：conf.yaml
+**natok-cli的相关配置：conf.yaml**
 ```yaml
 natok:
   server:
@@ -72,10 +71,10 @@ go mod tidy
 go mod vendor
 
 # 设置目标可执行程序操作系统构架，包括 386，amd64，arm
-set GOARCH=amd64
+go env -w GOARCH=amd64
 
 # 设置可执行程序运行操作系统，支持 darwin，freebsd，linux，windows
-set GOOS=windows
+go env -w GOOS=windows
 
 # golang windows 程序获取管理员权限(UAC)
 rsrc -manifest nac.manifest -o nac.syso
@@ -96,3 +95,6 @@ natok-cli与natok-server支持windows平台注册为服务运行，可支持开�
 
 **natok:1.2.0**
 natok-cli可与多个natok-server保持连接，支持从多个不同的natok-server来访问natok-cli，以实现更快及更优的网络通信。
+
+**natok:1.3.0**
+natok-cli与natok-server可支持udp网络代理。
