@@ -1,9 +1,0 @@
-{
-  "natok.server": {
-    "host": "127.0.0.1",
-    "port": 1001,
-    "access-key": "",
-    "cert-key-path": "s-cert.key",
-    "cert-pem-path": "s-cert.pem"
-  }
-}

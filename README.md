@@ -1,17 +1,15 @@
-# NATOK
+# NATOK · ![GitHub Repo stars](https://img.shields.io/github/stars/natokay/go-natok-server) ![GitHub Repo stars](https://img.shields.io/github/stars/natokay/go-natok-cli)
 
-- natok是一个将局域网内个人服务代理到公网可访问的内网穿透工具，基于tcp协议、支持udp协议，支持任何tcp上层协议（列如：http、https、ssh、telnet、data base、remote desktop....）。
-- 目前市面上提供类似服务的有：花生壳、natapp、ngrok等等。当然，这些工具都很优秀！但是免费提供的服务都很有限，想要有比较好的体验都需要支付一定的套餐费用，由于数据包会流经第三方，因此总归有些不太友好。
-- natok-server与natok-cli都基于GO语言开发，几乎不存在并发问题。运行时的内存开销也很低，一般在几十M左右。所以很推荐自主搭建服务！
+<div align="center">
+  <!-- Snake Code Contribution Map 贪吃蛇代码贡献图 -->
+  <img src="grid-snake.svg" />
+</div>
+<p/>
 
 
-**服务端与客户端**
-
-| 服务                     |支持系统| 下载地址                                               |
-| ------------------------|----- | ------------------------------------------------------ |
-| natok-cli |linux/windows| [GitHub](https://github.com/natokay/go-natok-cli/releases) |
-| natok-server| linux/windows|[GitHub](https://github.com/natokay/go-natok-server/releases) |
-
+- 🌱 natok是一个将局域网内个人服务代理到公网可访问的内网穿透工具，基于tcp协议、支持udp协议，支持任何tcp上层协议（列如：http、https、ssh、telnet、data base、remote desktop....）。
+- 🤔 目前市面上提供类似服务的有：花生壳、natapp、ngrok等等。当然，这些工具都很优秀！但是免费提供的服务都很有限，想要有比较好的体验都需要支付一定的套餐费用，由于数据包会流经第三方，因此总归有些不太友好。
+- ⚡ natok-server与natok-cli都基于GO语言开发，几乎不存在并发问题。运行时的内存开销也很低，一般在几十M左右。所以很推荐自主搭建服务！
 
 
 **natok-cli的相关配置：conf.yaml**

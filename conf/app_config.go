@@ -1,8 +1,9 @@
 package conf
 
 import (
-	"github.com/kataras/golog"
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -18,10 +19,11 @@ type AppConfig struct {
 }
 
 type Natok struct {
-	Server      []Server `yaml:"server"`        //服务器端
-	CertKeyPath string   `yaml:"cert-key-path"` //密钥路径
-	CertPemPath string   `yaml:"cert-pem-path"` //证书路径
-	LogFilePath string   `yaml:"log-file-path"` //日志路径
+	Server        []Server `yaml:"server"`          //服务器端
+	CertKeyPath   string   `yaml:"cert-key-path"`   //密钥路径
+	CertPemPath   string   `yaml:"cert-pem-path"`   //证书路径
+	LogFilePath   string   `yaml:"log-file-path"`   //日志路径
+	LogDebugLevel bool     `yaml:"log-debug-level"` //Debug日志
 }
 
 // Server NATOK服务配置
@@ -38,32 +40,53 @@ func init() {
 	// 读取文件内容
 	file, err := os.ReadFile(baseDir + "conf.yaml")
 	if err != nil {
-		golog.Error(err)
+		log.Error(err)
 		panic(err)
 	}
 	// 利用json转换为AppConfig
 	appConfig := new(AppConfig)
 	err = yaml.Unmarshal(file, appConfig)
 	if err != nil {
-		golog.Error(err)
+		log.Error(err)
 		panic(err)
 	}
 	conf := &appConfig.Natok
 	compile, err := regexp.Compile("^/|^\\\\|^[a-zA-Z]:")
 	// 密钥文件
 	if conf.CertKeyPath != "" && !compile.MatchString(conf.CertKeyPath) {
-		golog.Infof("%s -> %s", conf.CertKeyPath, baseDir+conf.CertKeyPath)
+		log.Infof("%s -> %s", conf.CertKeyPath, baseDir+conf.CertKeyPath)
 		conf.CertKeyPath = baseDir + conf.CertKeyPath
 	}
 	// 证书文件
 	if conf.CertPemPath != "" && !compile.MatchString(conf.CertPemPath) {
-		golog.Infof("%s -> %s", conf.CertPemPath, baseDir+conf.CertPemPath)
+		log.Infof("%s -> %s", conf.CertPemPath, baseDir+conf.CertPemPath)
 		conf.CertPemPath = baseDir + conf.CertPemPath
 	}
-	// 日志文件
+
+	// 日志记录配置
+	log.SetLevel(log.InfoLevel)
+	log.SetFormatter(&log.TextFormatter{
+		FullTimestamp:   true,
+		ForceColors:     true,
+		TimestampFormat: "2006-01-02 15:04:05.000",
+	})
+	// 在输出日志中添加文件名和方法信息
+	if appConfig.Natok.LogDebugLevel {
+		log.SetReportCaller(true)
+		log.SetLevel(log.DebugLevel)
+	}
+	// 日志记录输出文件
 	if conf.LogFilePath != "" && !compile.MatchString(conf.LogFilePath) {
-		golog.Infof("%s -> %s", conf.LogFilePath, baseDir+conf.LogFilePath)
+		log.Infof("%s -> %s", conf.LogFilePath, baseDir+conf.LogFilePath)
 		conf.LogFilePath = baseDir + conf.LogFilePath
+		logFile, err := os.OpenFile(conf.LogFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		if err != nil {
+			log.Fatal(err)
+		} else {
+			// 组合一下即可，os.Stdout代表标准输出流
+			multiWriter := io.MultiWriter(logFile, os.Stdout)
+			log.SetOutput(multiWriter)
+		}
 	}
 	AppConf = appConfig
 }
@@ -91,7 +114,7 @@ func getTmpDir() string {
 func getCurrentAbPathByExecutable() string {
 	exePath, err := os.Executable()
 	if err != nil {
-		golog.Fatal(err)
+		log.Fatal(err)
 	}
 	res, _ := filepath.EvalSymlinks(filepath.Dir(exePath))
 	return res

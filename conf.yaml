@@ -1,8 +1,12 @@
 natok:
   server:
-    - host: 127.0.0.1
+#    - host: yourdomain.com
+#      port: 1001
+#      access-key: 752b65f22c39e006db38078585dc4fa4
+    - host: localhost
       port: 1001
-      access-key: ""
+      access-key: 752b65f22c39e006db38078585dc4fa4
   cert-key-path: s-cert.key
   cert-pem-path: s-cert.pem
   log-file-path: out.log
+  log-debug-level: false
